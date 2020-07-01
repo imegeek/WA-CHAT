@@ -1,0 +1,60 @@
+#!/usr/bin/bash
+
+#colors
+NC='\033[0m'               # No Color
+R='\e[1;38;2;255;40;40m'   # Red
+G='\e[1;38;2;0;255;50m'    # Green
+Y='\e[1;38;2;255;200;0m'   # Yellow
+B='\e[1;38;2;0;100;255m'   # Blue
+C='\e[1;38;2;20;255;160m'  # Cyan
+W='\e[0m\033[1m'           # White
+
+banner() {
+clear
+if [ ! -d '/data/data/com.termux/files/home/storage' ];then
+termux-setup-storage
+sleep 4
+fi
+echo""
+echo -e "$G
+ _  _   __         ___  _  _   __  ____
+/ )( \ / _\  ___  / __)/ )( \ / _\(_  _)
+\ /\ //    \(___)( (__ ) __ (/    \ )(
+(_/\_)\_/\_/      \___)\_)(_/\_/\_/(__)\e[0m\e[1m v.beta
+
+"
+if [ ! -d '/storage/emulated/0/WhatsApp/Media' ];then
+printf "$R[!] WhatsApp not installed, Install it [!] Opening Play Store... " & sleep 0.5
+xdg-open "https://play.google.com/store/apps/details?id=com.whatsapp"
+echo""
+echo""
+exit
+fi
+}
+
+main() {
+if [ -d '/data/data/com.termux/files/home/storage' ];then
+if [ -d '/storage/emulated/0/WhatsApp/Media' ];then
+printf "$Y"
+read -p "[+] Country Code : " ccode
+echo""
+printf "$B"
+read -p "[!] WhatsApp Number : " number
+echo""
+printf "$W"
+read -p "[?] Messege : " text
+connection="$(ping -c 1 -q www.google.com >&/dev/null; echo $?)"
+if [[ "$connection" != 0 ]]
+then echo""
+echo -e "$R[$G-$R] No Internet$G connection!"
+echo""
+exit
+fi
+xdg-open https://api.whatsapp.com/send?phone="$ccode$number&text=$text"
+echo""
+printf "$NC"
+fi
+fi
+}
+banner
+main
