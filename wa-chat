@@ -52,7 +52,6 @@ exit
 fi
 xdg-open https://api.whatsapp.com/send?phone="$ccode$number&text=$text"
 echo""
-echo""
 printf "$W[?] Are you send messege again Y/n : "
 printf "$NC"
 read input
