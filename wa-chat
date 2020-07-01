@@ -1,5 +1,10 @@
 #!/usr/bin/bash
 
+# Author : ABHacker Official
+# Copyright : ©2020-1-Jul
+# WA-CHAT + MIT LICENSE (^^)
+# Script follows here:
+
 #colors
 NC='\033[0m'               # No Color
 R='\e[1;38;2;255;40;40m'   # Red
