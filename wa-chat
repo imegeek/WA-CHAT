@@ -20,7 +20,7 @@ echo -e "$G
  _  _   __         ___  _  _   __  ____
 / )( \ / _\  ___  / __)/ )( \ / _\(_  _)
 \ /\ //    \(___)( (__ ) __ (/    \ )(
-(_/\_)\_/\_/      \___)\_)(_/\_/\_/(__)\e[0m\e[1m v.beta
+(_/\_)\_/\_/      \___)\_)(_/\_/\_/(__)\e[0m\e[1m v.stable
 
 "
 if [ ! -d '/storage/emulated/0/WhatsApp/Media' ];then
@@ -46,7 +46,7 @@ read -p "[?] Messege : " text
 connection="$(ping -c 1 -q www.google.com >&/dev/null; echo $?)"
 if [[ "$connection" != 0 ]]
 then echo""
-echo -e "$R[$G-$R] No Internet$G connection!"
+echo -e "$R[$G-$R] No Internet$G connection!$NC"
 echo""
 exit
 fi
