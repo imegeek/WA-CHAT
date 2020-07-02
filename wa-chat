@@ -14,6 +14,16 @@ B='\e[1;38;2;0;100;255m'   # Blue
 C='\e[1;38;2;20;255;160m'  # Cyan
 W='\e[0m\033[1m'           # White
 
+check_net() {
+connection="$(ping -c 1 -q www.google.com >&/dev/null; echo $?)"
+if [[ "$connection" != 0 ]]
+then echo""
+echo -e "$R[$G-$R] No Internet$G connection!$NC"
+echo""
+exit
+fi
+}
+
 banner() {
 clear
 if [ ! -d '/data/data/com.termux/files/home/storage' ];then
@@ -48,14 +58,7 @@ read -p "[!] WhatsApp Number : " number
 echo""
 printf "$W"
 read -p "[?] Messege : " text
-connection="$(ping -c 1 -q www.google.com >&/dev/null; echo $?)"
-if [[ "$connection" != 0 ]]
-then echo""
-echo -e "$R[$G-$R] No Internet$G connection!$NC"
-echo""
-exit
-fi
-xdg-open https://api.whatsapp.com/send?phone="$ccode$number&text=$text"
+check_net && xdg-open https://api.whatsapp.com/send?phone="$ccode$number&text=$text"
 echo""
 printf "$W[?] Continue Sending Messeges ? Y/n "
 printf "$NC"
@@ -65,7 +68,7 @@ if [[ $input = "y" ]] || [[ $input = "Y" ]]
 echo""
 printf "$W"
 read -p "[?] Messege : " text
-xdg-open https://api.whatsapp.com/send?phone="$ccode$number&text=$text"
+check_net && xdg-open https://api.whatsapp.com/send?phone="$ccode$number&text=$text"
 done
 echo""
 else echo""
